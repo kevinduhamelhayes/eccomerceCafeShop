@@ -1,5 +1,5 @@
 export type ResponseType = {
-  result: any;
+  result: unknown;
   loading: boolean;
   error: string;
 };
