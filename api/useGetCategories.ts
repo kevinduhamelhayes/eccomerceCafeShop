@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 
 export function useGetCategories() {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/categories?populate=*`;
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -14,6 +14,7 @@ export function useGetCategories() {
         setResult(json.data);
         setLoading(false);
       } catch (error) {
+        console.log(error)
         setError(error instanceof Error ? error.message : String(error));
         setLoading(false);
       }

@@ -1,32 +1,54 @@
 "use client"
-import { Heart, ShoppingCart, User } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import Menulist from './Menulist';
-import ItemsMenuMobile from './ItemsMenuMobile';
-import ToggleTheme from './ToggleTheme';
+import { BaggageClaim, Heart, ShoppingCart, User } from "lucide-react";
+import { useRouter } from "next/navigation";
+import MenuList from "./Menulist";
+import ItemsMenuMobile from "./ItemsMenuMobile";
+import ToggleTheme from "./ToggleTheme";
+import { useCart } from "../hooks/use-cart";
+import { useLovedProducts } from "../hooks/use-loved-products";
 
 const Navbar = () => {
-  const router = useRouter();
-  return (
-    <nav className='flex items-center justify-between p-4 mx-auto cursor-pointer sm:max-w-4xl md:max-w-6xl'>
-      <Link href='/'>
-        <h1 className='text-2xl font-bold' onClick={() => router.push("/")}>Coffee Shop</h1>
-      </Link>
-      <div className='items-center justify-between hidden space-x-4 text-lg sm:flex'>
-        <Menulist />
-      </div>
-      <div className='flex sm:hidden'>
-        <ItemsMenuMobile />
-      </div>
-      <div className='flex items-center justify-between gap-2 sm:gap-4'>
-        <ShoppingCart strokeWidth={1.5} size={24} className='cursor-pointer' onClick={() => router.push("/cart")} />
-        <Heart strokeWidth={1.5} size={24} className='cursor-pointer' onClick={() => router.push("/wishlist")} />
-        <User strokeWidth={1.5} size={24} className='cursor-pointer' onClick={() => router.push("/account")} />
-        <ToggleTheme />
-      </div>
-    </nav>
-  );
+    const router = useRouter()
+    const cart = useCart()
+    const { lovedItems } = useLovedProducts()
+
+    return (
+        <div className="flex items-center justify-between p-4 mx-auto cursor-pointer sm:max-w-4xl md:max-w-6xl">
+            <h1 className="text-3xl" onClick={() => router.push("/")}>Tarre
+                <span className="font-bold">Dev</span>
+            </h1>
+            <div className="items-center justify-between hidden sm:flex">
+                <MenuList />
+            </div>
+            <div className="flex sm:hidden">
+                <ItemsMenuMobile />
+            </div>
+            <div className="flex items-center justify-between gap-2 sm:gap-7">
+                {cart.items.length === 0 ?
+                    <ShoppingCart strokeWidth="1"
+                        className="cursor-pointer"
+                        onClick={() => router.push("/cart")}
+                    />
+                    : (
+                        <div className="flex gap-1 cursor-pointer" onClick={() => router.push("/cart")}>
+                            <BaggageClaim strokeWidth={1} className="cursor-pointer" />
+                            <span>{cart.items.length}</span>
+                        </div>
+                    )}
+
+
+                <Heart
+                    strokeWidth="1"
+                    className={`cursor-pointer 
+                    ${lovedItems.length > 0 && 'fill-black dark:fill-white'}`}
+                    onClick={() => router.push("/loved-products")} />
+
+                <User strokeWidth={1} className="cursor-pointer" />
+
+                <ToggleTheme />
+            </div>
+        </div>
+    );
 }
 
 export default Navbar;
