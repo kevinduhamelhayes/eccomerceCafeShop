@@ -17,6 +17,6 @@ export function useGetCategories() {
         setLoading(false);
       }
     })();
-  }, [url]);
+  }, []);
   return { result, loading, error };
 }

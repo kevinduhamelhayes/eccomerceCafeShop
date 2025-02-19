@@ -5,6 +5,7 @@ import CarouselTextBaner from "@/components/CarouselTextBaner";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import BannerDiscount from "@/components/BannerDiscount";
 import ChoseCategory from "@/components/ChoseCategory";
+import BannerProduct from "@/components/BannerProduct";
 
 
 
@@ -16,6 +17,7 @@ export default function Home() {
     <FeaturedProducts />
     <BannerDiscount />
     <ChoseCategory />
+    <BannerProduct />
     <Button>Click me</Button>
     <Footer />
   </main>

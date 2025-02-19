@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -20,25 +19,21 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Cafe en granos",
     href: "/category/grano",
-    description:
-      "Granos de cafe de la mejor calidad, variedades y sabores",
+    description: "Granos de cafe de la mejor calidad, variedades y sabores",
   },
   {
     title: "Cafe molido",
     href: "/category/molido",
-    description:
-      "El mejor cafe molido, variedades y sabores",
+    description: "El mejor cafe molido, variedades y sabores",
   },
   {
     title: "Cafe en capsulas",
     href: "/category/capsulas",
-    description:
-      "Nuestra infinita variedad de cafe en capsulas",
-  }
-  
+    description: "Nuestra infinita variedad de cafe en capsulas",
+  },
 ]
 
-const Menulist=()=> {
+const Menulist = () => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -47,15 +42,14 @@ const Menulist=()=> {
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      Nuestra cafeteria
-                    
+                <NavigationMenu>
+                  <div className="mb-2 mt-4 text-lg font-medium">
+                    Nuestra cafeteria
                     <p className="text-sm leading-tight text-muted-foreground">
                       Sumergete en el mundo del cafe con nosotros y descubre la mejor calidad y variedad de cafe con 60 años de experiencia en el mercado de cafe
                     </p>
-                    </div>
-                </NavigationMenuLink>
+                  </div>
+                </NavigationMenu>
               </li>
               <ListItem href="/shop" title="Tienda">
                 Accede a toda tu informacion, pedidos, favoritos y mas
@@ -72,13 +66,9 @@ const Menulist=()=> {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Cafes</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
+                <ListItem key={component.title} title={component.title} href={component.href}>
                   {component.description}
                 </ListItem>
               ))}
@@ -99,7 +89,7 @@ const Menulist=()=> {
 export default Menulist
 
 const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
+  React.ComponentRef<"a">,
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (

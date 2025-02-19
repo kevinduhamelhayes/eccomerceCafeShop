@@ -9,7 +9,7 @@ import ToggleTheme from './ToggleTheme';
 const Navbar = () => {
   const router = useRouter();
   return (
-    <nav className='flex items-center justify-between p-4 mx-auto  cursor-pointer sm:max-w-4xl md:max-w-6xl' >
+    <nav className='flex items-center justify-between p-4 mx-auto cursor-pointer sm:max-w-4xl md:max-w-6xl'>
       <Link href='/'>
         <h1 className='text-2xl font-bold' onClick={() => router.push("/")}>Coffee Shop</h1>
       </Link>
@@ -20,13 +20,13 @@ const Navbar = () => {
         <ItemsMenuMobile />
       </div>
       <div className='flex items-center justify-between gap-2 sm:gap-4'>
-      <ShoppingCart strokeWidth={1.5} size={24} className='cursor-pointer' onClick={()=> router.push ("/cart")} />
-        <Heart strokeWidth={1.5} size={24} className='cursor-pointer' onClick={()=> router.push ("/wishlist")} />
-          <User strokeWidth={1.5} size={24} className='cursor-pointer' onClick={()=> router.push ("/account")} />
-            
-            <ToggleTheme />
+        <ShoppingCart strokeWidth={1.5} size={24} className='cursor-pointer' onClick={() => router.push("/cart")} />
+        <Heart strokeWidth={1.5} size={24} className='cursor-pointer' onClick={() => router.push("/wishlist")} />
+        <User strokeWidth={1.5} size={24} className='cursor-pointer' onClick={() => router.push("/account")} />
+        <ToggleTheme />
       </div>
     </nav>
   );
 }
-export default Navbar ;
+
+export default Navbar;
