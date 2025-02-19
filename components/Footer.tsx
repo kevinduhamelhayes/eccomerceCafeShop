@@ -31,7 +31,7 @@ const Footer = () => {
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <p>
                         <span className="font-bold">
-                            Cafesitos e-commerce
+                            Cafesitos 
                         </span>
                         E-commerce
                     </p>

@@ -13,8 +13,8 @@ const BannerProduct = () => {
         <p className='mt-2 text-lg font-semibold'>
           despierta tus sentidos
         </p>
-        <Link href='/shop' className={buttonVariants()}>comprar ahora</Link>
-        <div className='h-[350px] md:h-[600px] bg-url[("/slider-image.jpg")] bg-center mt-5'></div>
+        <Link href='/shop' className="px-4 py-2 shadow-lg text-black">comprar ahora</Link>
+        <div className='h-[350px] md:h-[600px] bg-[url("/slider-image.jpg")] bg-center mt-5'></div>
       </div>
     </>
   )

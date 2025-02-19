@@ -23,17 +23,19 @@ const FeaturedProducts = () => {
           {loading && (
             <SkeletonSchema grid={3} />
           )}
-          {/* {result !== null && (
+          {/* {result !== null && 
             result.map((product: ProductType) => {
               const { attributes, id } = product
               const { productName, images, price, origin, taste, productMedia } = attributes
               return (
-                <CarouselItem key={id} className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4 group'>
+                <CarouselItem key={id}
+                 className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4 group'
+                 >
                   <div className='p-1'>
                     <Card className='py-4 border border-gray-200 shadow-none'>
                       <CardContent className='flex flex-col items-center justify-center'>
                         <Image
-                          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${Images.data[0].attributes.url}`}
+                          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${Images.data[0].url}`}
                           width={200}
                           height={200}
                           alt="image featured"
