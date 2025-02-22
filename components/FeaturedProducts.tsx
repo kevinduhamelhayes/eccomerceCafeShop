@@ -23,7 +23,7 @@ const FeaturedProducts = () => {
           {loading && (
             <SkeletonSchema grid={3} />
           )}
-          {/* {result !== null && 
+          {result !== null && 
             result.map((product: ProductType) => {
               const { attributes, id } = product
               const { productName, images, price, origin, taste, productMedia } = attributes
@@ -35,10 +35,10 @@ const FeaturedProducts = () => {
                     <Card className='py-4 border border-gray-200 shadow-none'>
                       <CardContent className='flex flex-col items-center justify-center'>
                         <Image
-                          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${Images.data[0].url}`}
+                          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${images.data[0].attributes.url}`}
                           width={200}
                           height={200}
-                          alt="image featured"
+                          alt={productName}
                         />
                         <div className='absolute w-full px-6 transition duration-200 opacity-0 group-hover:opacity-100 bottom-5'>
                           <div className='flex justify-center gap-x-6'>
@@ -55,9 +55,12 @@ const FeaturedProducts = () => {
                           </div>
                         </div>
                       </CardContent>
-                      <div className='flex justify-between gap-4 px-8'>
-                        <h3 className='text-lg font-bold'>{productName}</h3>
-                        <div className='flex gap-4 items-center justify-between'>
+                      <div className='flex flex-col gap-2 px-8'>
+                        <div className='flex justify-between items-center'>
+                          <h3 className='text-lg font-bold'>{productName}</h3>
+                          <span className='font-semibold'>${price}</span>
+                        </div>
+                        <div className='flex gap-4 items-center'>
                           <p className='px-2 text-white bg-black rounded-full w-fit'>{taste}</p>
                           <p className='px-2 text-white bg-yellow-900 rounded-full w-fit'>{origin}</p>
                         </div> 
@@ -67,7 +70,7 @@ const FeaturedProducts = () => {
                 </CarouselItem>
               )
             })
-          )} */}
+          }
         </CarouselContent>
         <CarouselPrevious className='bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700' />
         <CarouselNext className='bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700' />
