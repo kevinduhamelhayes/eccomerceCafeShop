@@ -1,5 +1,5 @@
 "use client"
-import { useFetch } from '@/hooks/useFetch';
+import { useFeaturedProducts } from '@/api/useFeaturedProducts';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './ui/carousel';
 import { LoadingSpinner, ErrorMessage, EmptyState } from './ui/loading-states';
 import Image from 'next/image';
@@ -13,7 +13,7 @@ import { memo, useCallback } from 'react';
 const ProductCard = memo(({ product }: { product: ProductType }) => {
   const Router = useRouter();
   const { attributes, id } = product;
-  const { productName, images } = attributes;
+  const { productName, productMedia } = attributes;
 
   const handleProductClick = useCallback(() => {
     Router.push(`/products/${id}`);
@@ -23,13 +23,24 @@ const ProductCard = memo(({ product }: { product: ProductType }) => {
     Router.push(`/cart`);
   }, [Router]);
 
+  // Get the image URL, using either productMedia or a placeholder
+  const imageUrl = productMedia?.data?.[0]?.attributes?.url || '/placeholder-coffee.jpg';
+  
+  // For backend URLs we need to prepend the backend URL
+  // For public images in the public folder (like placeholder), we use as is
+  const fullImageUrl = imageUrl.startsWith('/placeholder') 
+    ? imageUrl  // Use as is for placeholders
+    : imageUrl.startsWith('/') 
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${imageUrl}` // Add backend URL for relative paths
+      : imageUrl; // Use as is for absolute URLs
+
   return (
     <CarouselItem className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4 group'>
       <div className='p-1'>
         <Card className='py-4 border border-gray-200 shadow-none'>
           <CardContent className='flex flex-col items-center justify-center'>
             <Image
-              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${images.data[0].attributes.url}`}
+              src={fullImageUrl}
               width={200}
               height={200}
               alt={productName}
@@ -58,18 +69,18 @@ const ProductCard = memo(({ product }: { product: ProductType }) => {
 ProductCard.displayName = 'ProductCard';
 
 const FeaturedProducts = () => {
-  const { data, loading, error } = useFetch<ProductType[]>('/api/products?filters[featured][$eq]=true&populate=*');
+  const { result, loading, error } = useFeaturedProducts();
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
-  if (!data || data.length === 0) return <EmptyState message="No featured products found" />;
+  if (!result || result.length === 0) return <EmptyState message="No featured products found" />;
 
   return (
     <div className='max-w-6xl py-4 mx-auto sm:py-16'>
       <h3 className='text-3xl px-6 font-bold text-center'>Featured Products</h3>
       <Carousel>
         <CarouselContent className='-ml-2 md:-ml-4'>
-          {data.map((product) => (
+          {result.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </CarouselContent>
